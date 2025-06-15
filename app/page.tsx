@@ -9,7 +9,7 @@ import { Code2, Zap, Rocket, Globe, ArrowRight, Github, Mail, Menu, X, ChevronDo
 const teamMembers = [
   {
     id: 1,
-    name: "Alex Chen",
+    name: "Bipin Khatiwada",
     role: "Full Stack Developer",
     image: "/placeholder.svg?height=200&width=200",
     social: "https://github.com/alexchen",
@@ -17,7 +17,7 @@ const teamMembers = [
   },
   {
     id: 2,
-    name: "Sarah Kim",
+    name: "Sudip Dahal",
     role: "UI/UX Designer",
     image: "/placeholder.svg?height=200&width=200",
     social: "https://dribbble.com/sarahkim",
@@ -25,7 +25,7 @@ const teamMembers = [
   },
   {
     id: 3,
-    name: "Marcus Johnson",
+    name: "Anit Shrestha",
     role: "DevOps Engineer",
     image: "/placeholder.svg?height=200&width=200",
     social: "https://linkedin.com/in/marcusj",
