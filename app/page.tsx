@@ -4,7 +4,23 @@ import type React from "react"
 
 import { useEffect, useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
-import { Code2, Zap, Rocket, Globe, ArrowRight, Github, Mail, Menu, X, ChevronDown, Star, Sparkles } from "lucide-react"
+import {
+  Code2,
+  Zap,
+  Rocket,
+  Globe,
+  ArrowRight,
+  Github,
+  Mail,
+  Menu,
+  X,
+  ChevronDown,
+  Star,
+  Sparkles,
+  CheckCircle,
+  AlertCircle,
+} from "lucide-react"
+import { submitContactForm } from "./actions/contact"
 
 const teamMembers = [
   {
@@ -110,13 +126,11 @@ export default function HomePage() {
   const servicesRef = useRef<HTMLDivElement>(null)
   const contactRef = useRef<HTMLDivElement>(null)
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-    service: "",
-  })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null
+    message: string
+  }>({ type: null, message: "" })
 
   // Initialize interactive particles
   useEffect(() => {
@@ -279,6 +293,38 @@ export default function HomePage() {
   const scrollToSection = (sectionRef: React.RefObject<HTMLDivElement>) => {
     sectionRef.current?.scrollIntoView({ behavior: "smooth" })
     setIsMenuOpen(false)
+  }
+
+  const handleSubmit = async (formData: FormData) => {
+    setIsSubmitting(true)
+    setSubmitStatus({ type: null, message: "" })
+
+    try {
+      const result = await submitContactForm(formData)
+
+      if (result.success) {
+        setSubmitStatus({
+          type: "success",
+          message: result.message || "Message sent successfully!",
+        })
+        // Reset form by reloading the page or clearing form fields
+        setTimeout(() => {
+          window.location.reload()
+        }, 3000)
+      } else {
+        setSubmitStatus({
+          type: "error",
+          message: result.error || "Failed to send message",
+        })
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: "error",
+        message: "Something went wrong. Please try again.",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -793,39 +839,46 @@ export default function HomePage() {
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-cyan-400/50 transition-all duration-500">
               <h3 className="text-2xl font-semibold text-white mb-6 font-orbitron">Send us a message</h3>
 
-              <form
-                className="space-y-6"
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  setIsSubmitting(true)
-                  // Simulate form submission
-                  setTimeout(() => {
-                    setIsSubmitting(false)
-                    setFormData({ name: "", email: "", message: "", service: "" })
-                  }, 2000)
-                }}
-              >
+              {/* Status Messages */}
+              {submitStatus.type && (
+                <div
+                  className={`mb-6 p-4 rounded-lg flex items-center space-x-3 ${
+                    submitStatus.type === "success"
+                      ? "bg-green-500/10 border border-green-500/20 text-green-400"
+                      : "bg-red-500/10 border border-red-500/20 text-red-400"
+                  }`}
+                >
+                  {submitStatus.type === "success" ? (
+                    <CheckCircle className="h-5 w-5 flex-shrink-0" />
+                  ) : (
+                    <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                  )}
+                  <p className="text-sm">{submitStatus.message}</p>
+                </div>
+              )}
+
+              <form action={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="group">
                     <label className="block text-sm font-medium text-gray-300 mb-2">Name</label>
                     <input
                       type="text"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      name="name"
                       className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 group-hover:border-purple-400/50"
                       placeholder="Your name"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
                   <div className="group">
                     <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
                     <input
                       type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      name="email"
                       className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 group-hover:border-purple-400/50"
                       placeholder="your@email.com"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
                 </div>
@@ -833,40 +886,45 @@ export default function HomePage() {
                 <div className="group">
                   <label className="block text-sm font-medium text-gray-300 mb-2">Service</label>
                   <select
-                    value={formData.service}
-                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                    name="service"
                     className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 group-hover:border-purple-400/50"
                     required
+                    disabled={isSubmitting}
                   >
                     <option value="">Select a service</option>
-                    <option value="website">Website Development</option>
-                    <option value="design">UI/UX Design</option>
-                    <option value="app">App Prototyping</option>
-                    <option value="seo">SEO & Optimization</option>
+                    <option value="Website Development">Website Development</option>
+                    <option value="UI/UX Design">UI/UX Design</option>
+                    <option value="App Prototyping">App Prototyping</option>
+                    <option value="SEO & Optimization">SEO & Optimization</option>
                   </select>
                 </div>
 
                 <div className="group">
                   <label className="block text-sm font-medium text-gray-300 mb-2">Message</label>
                   <textarea
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    name="message"
                     rows={4}
                     className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 group-hover:border-purple-400/50 resize-none"
                     placeholder="Tell us about your project..."
                     required
+                    disabled={isSubmitting}
                   />
                 </div>
 
                 <Button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white border-0 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/50 disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={isSubmitting || submitStatus.type === "success"}
+                  className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white border-0 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
                   {isSubmitting ? (
                     <>
                       <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2" />
-                      Sending...
+                      Sending Message...
+                    </>
+                  ) : submitStatus.type === "success" ? (
+                    <>
+                      <CheckCircle className="mr-2 h-5 w-5" />
+                      Message Sent!
                     </>
                   ) : (
                     <>
