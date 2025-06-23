@@ -12,23 +12,26 @@ const teamMembers = [
     name: "Bipin Khatiwada",
     role: "Full Stack Developer",
     image: "/placeholder.svg?height=200&width=200",
-    social: "https://github.com/alexchen",
+    social: "https://github.com/bipin0005",
+    website: "https://bipinkhatiwada.com.np",
     skills: ["React", "Node.js", "TypeScript"],
   },
   {
     id: 2,
-    name: "Sudip Dahal",
+    name: "Anit Shrestha",
     role: "UI/UX Designer",
     image: "/placeholder.svg?height=200&width=200",
-    social: "https://dribbble.com/sarahkim",
+    social: "https://dribbble.com/anitshrestha",
+    website: "https://anitshrestha.com.np",
     skills: ["Figma", "Adobe XD", "Prototyping"],
   },
   {
     id: 3,
-    name: "Anit Shrestha",
+    name: "Sudip Dahal",
     role: "DevOps Engineer",
     image: "/placeholder.svg?height=200&width=200",
-    social: "https://linkedin.com/in/marcusj",
+    social: "https://linkedin.com/in/sudip-dahal",
+    website: "https://sudipdahal1.com.np",
     skills: ["AWS", "Docker", "Kubernetes"],
   },
   {
@@ -37,6 +40,7 @@ const teamMembers = [
     role: "Mobile Developer",
     image: "/placeholder.svg?height=200&width=200",
     social: "https://github.com/elenarodriguez",
+    website: "https://elenarodriguez.dev",
     skills: ["React Native", "Flutter", "Swift"],
   },
 ]
@@ -500,8 +504,13 @@ export default function HomePage() {
           {/* Team Members Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {teamMembers.map((member, index) => (
-              <div key={member.id} className="group relative" style={{ animationDelay: `${index * 150}ms` }}>
-                <div className="relative p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl hover:border-cyan-400/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20 cursor-pointer overflow-hidden">
+              <div
+                key={member.id}
+                className="group relative cursor-pointer"
+                style={{ animationDelay: `${index * 150}ms` }}
+                onClick={() => window.open(member.website, "_blank")}
+              >
+                <div className="relative p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl hover:border-cyan-400/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20 overflow-hidden">
                   {/* Floating Animation */}
                   <div className="animate-float" style={{ animationDelay: `${index * 0.5}s` }}>
                     {/* Member Image */}
@@ -541,9 +550,17 @@ export default function HomePage() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center w-8 h-8 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-full text-white hover:scale-125 hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         <Github className="h-4 w-4" />
                       </a>
+                    </div>
+                  </div>
+
+                  {/* Click indicator */}
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-6 h-6 bg-gradient-to-r from-purple-400 to-cyan-400 rounded-full flex items-center justify-center">
+                      <ArrowRight className="h-3 w-3 text-white" />
                     </div>
                   </div>
 
