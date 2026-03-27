@@ -2,7 +2,9 @@ import type { ContactFormData } from "./email-types"
 
 const RESEND_URL = "https://api.resend.com/emails"
 const FROM_EMAIL = "onboarding@resend.dev" // Resend's default verified sender for testing
-const TO_EMAIL = "myauthgrp@gmail.com" // Your Gmail to receive contact form submissions
+// NOTE: In Resend test mode, you can only send to your verified account email.
+// To send to any email, verify your domain at resend.com/domains
+const TO_EMAIL = "khatiwadabipin50@gmail.com" // Your verified Resend account email
 
 async function sendViaResend(payload: unknown) {
   // Check for API key only when actually sending
@@ -104,7 +106,18 @@ Sent from MyAuthGrp Contact Form
 }
 
 /* ========== 2)  auto-reply to the visitor ============== */
+// NOTE: Auto-reply is disabled in Resend test mode because it can only send
+// to your verified account email. To enable auto-replies to visitors:
+// 1. Verify your domain at resend.com/domains
+// 2. Update FROM_EMAIL to use your verified domain (e.g., hello@myauthgrp.com)
+// 3. Remove the early return below
 export async function sendAutoReply(data: ContactFormData) {
+  // Skip auto-reply in test mode (can't send to unverified emails)
+  if (FROM_EMAIL === "onboarding@resend.dev") {
+    console.log("Auto-reply skipped: Resend is in test mode")
+    return { success: true, skipped: true }
+  }
+
   try {
     await sendViaResend({
       from: FROM_EMAIL,
