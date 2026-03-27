@@ -373,7 +373,8 @@ export default function HomePage() {
       </div>
 
       {/* Interactive Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 p-6 backdrop-blur-md bg-black/20 border-b border-white/10">
+      <header>
+        <nav className="fixed top-0 left-0 right-0 z-50 p-6 backdrop-blur-md bg-black/20 border-b border-white/10" aria-label="Main navigation">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div
             className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent cursor-pointer hover:scale-110 transition-transform duration-300"
@@ -440,9 +441,11 @@ export default function HomePage() {
           </div>
         </div>
       </nav>
+      </header>
 
       {/* Hero Section */}
-      <section ref={heroRef} className="relative z-10 min-h-screen flex items-center justify-center px-6">
+      <main>
+      <section id="hero" ref={heroRef} className="relative z-10 min-h-screen flex items-center justify-center px-6" aria-label="Hero section">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-8">
             {/* Animated Logo/Icon */}
@@ -535,10 +538,10 @@ export default function HomePage() {
       </section>
 
       {/* About Us Section */}
-      <section ref={aboutRef} className="relative z-10 py-20 px-6">
+      <section id="about" ref={aboutRef} className="relative z-10 py-20 px-6" aria-labelledby="about-heading">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-500 cursor-default font-orbitron">
+            <h2 id="about-heading" className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-500 cursor-default font-orbitron">
               Meet Our Team
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed hover:text-white transition-colors duration-500">
@@ -642,10 +645,10 @@ export default function HomePage() {
       </section>
 
       {/* Services Section */}
-      <section ref={servicesRef} className="relative z-10 py-20 px-6">
+      <section id="services" ref={servicesRef} className="relative z-10 py-20 px-6" aria-labelledby="services-heading">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-500 cursor-default font-orbitron">
+            <h2 id="services-heading" className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-500 cursor-default font-orbitron">
               Our Services
             </h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -743,10 +746,10 @@ export default function HomePage() {
       </section>
 
       {/* Portfolio Preview Section */}
-      <section className="relative z-10 py-20 px-6">
+      <section id="portfolio" className="relative z-10 py-20 px-6" aria-labelledby="portfolio-heading">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-500 cursor-default font-orbitron">
+            <h2 id="portfolio-heading" className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-500 cursor-default font-orbitron">
               Our Portfolio
             </h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -823,11 +826,11 @@ export default function HomePage() {
       </section>
 
       {/* Contact Section */}
-      <section ref={contactRef} className="relative z-10 py-20 px-6">
+      <section id="contact" ref={contactRef} className="relative z-10 py-20 px-6" aria-labelledby="contact-heading">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-500 cursor-default font-orbitron">
-              Let's Build Together
+            <h2 id="contact-heading" className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-500 cursor-default font-orbitron">
+              Let&apos;s Build Together
             </h2>
             <p className="text-xl text-gray-300 mb-8 hover:text-white transition-colors duration-500">
               Ready to create something extraordinary? Get in touch with our team.
@@ -990,9 +993,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </main>
 
       {/* Footer */}
-      <footer className="relative z-10 py-12 px-6 border-t border-white/10 backdrop-blur-sm">
+      <footer className="relative z-10 py-12 px-6 border-t border-white/10 backdrop-blur-sm" role="contentinfo">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             {/* Brand */}
