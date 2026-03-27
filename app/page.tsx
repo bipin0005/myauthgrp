@@ -64,51 +64,88 @@ const teamMembers = [
 const portfolioProjects = [
   {
     id: 1,
-    title: "E-Commerce Platform",
-    description: "Modern shopping experience with AI recommendations",
+    title: "Pakenham Project",
+    description: "Custom web solution with modern design and functionality",
     image: "/placeholder.svg?height=300&width=400",
-    tech: ["Next.js", "Stripe", "PostgreSQL"],
-    link: "#",
+    tech: ["Next.js", "React", "Tailwind CSS"],
+    link: "https://pakenham.myauthdev.com",
   },
   {
     id: 2,
-    title: "Healthcare Dashboard",
-    description: "Real-time patient monitoring system",
+    title: "Project One",
+    description: "Dynamic web application with interactive features",
     image: "/placeholder.svg?height=300&width=400",
-    tech: ["React", "D3.js", "Node.js"],
-    link: "#",
+    tech: ["React", "Node.js", "MongoDB"],
+    link: "https://p1.myauthdev.com",
   },
   {
     id: 3,
-    title: "Crypto Trading App",
-    description: "Mobile-first trading platform with live charts",
+    title: "Project Two",
+    description: "Responsive web platform with seamless user experience",
     image: "/placeholder.svg?height=300&width=400",
-    tech: ["React Native", "WebSocket", "Redis"],
-    link: "#",
+    tech: ["Next.js", "TypeScript", "PostgreSQL"],
+    link: "https://p2.myauthdev.com",
   },
   {
     id: 4,
-    title: "AI Content Generator",
-    description: "GPT-powered content creation tool",
+    title: "Project Three",
+    description: "Full-stack application with real-time capabilities",
     image: "/placeholder.svg?height=300&width=400",
-    tech: ["Python", "OpenAI", "FastAPI"],
-    link: "#",
+    tech: ["React", "Firebase", "Tailwind CSS"],
+    link: "https://p3.myauthdev.com",
   },
   {
     id: 5,
-    title: "Social Media Analytics",
-    description: "Comprehensive social media insights platform",
+    title: "Project Four",
+    description: "Modern web solution with cutting-edge technology",
     image: "/placeholder.svg?height=300&width=400",
-    tech: ["Vue.js", "Chart.js", "MongoDB"],
-    link: "#",
+    tech: ["Vue.js", "Express", "MySQL"],
+    link: "https://p4.myauthdev.com",
   },
   {
     id: 6,
-    title: "IoT Smart Home",
-    description: "Connected home automation system",
+    title: "Project Five",
+    description: "Scalable web platform with advanced features",
     image: "/placeholder.svg?height=300&width=400",
-    tech: ["Arduino", "MQTT", "React"],
-    link: "#",
+    tech: ["Next.js", "Prisma", "PostgreSQL"],
+    link: "https://p5.myauthdev.com",
+  },
+]
+
+// All projects for the projects page
+export const allProjects = [
+  ...portfolioProjects,
+  {
+    id: 7,
+    title: "Project Six",
+    description: "Enterprise-grade web application",
+    image: "/placeholder.svg?height=300&width=400",
+    tech: ["React", "GraphQL", "AWS"],
+    link: "https://p6.myauthdev.com",
+  },
+  {
+    id: 8,
+    title: "Project Seven",
+    description: "High-performance web solution",
+    image: "/placeholder.svg?height=300&width=400",
+    tech: ["Next.js", "Redis", "Docker"],
+    link: "https://p7.myauthdev.com",
+  },
+  {
+    id: 9,
+    title: "Project Eight",
+    description: "Innovative digital platform",
+    image: "/placeholder.svg?height=300&width=400",
+    tech: ["React", "Node.js", "MongoDB"],
+    link: "https://p8.myauthdev.com",
+  },
+  {
+    id: 10,
+    title: "Project Ten",
+    description: "Comprehensive web ecosystem",
+    image: "/placeholder.svg?height=300&width=400",
+    tech: ["Next.js", "Supabase", "Tailwind CSS"],
+    link: "https://p10.myauthdev.com",
   },
 ]
 
@@ -777,6 +814,8 @@ export default function HomePage() {
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <a
                       href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="px-6 py-2 bg-gradient-to-r from-purple-600 to-cyan-600 text-white rounded-full font-semibold hover:scale-110 transition-transform duration-300"
                     >
                       View Project
@@ -814,13 +853,15 @@ export default function HomePage() {
 
           {/* View All Projects Button */}
           <div className="text-center mt-12">
-            <Button
-              size="lg"
-              className="group bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white border-0 px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/50"
-            >
-              View All Projects
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </Button>
+            <a href="/projects">
+              <Button
+                size="lg"
+                className="group bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white border-0 px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/50"
+              >
+                View All Projects
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+              </Button>
+            </a>
           </div>
         </div>
       </section>
