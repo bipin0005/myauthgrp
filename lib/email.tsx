@@ -149,7 +149,7 @@ export async function sendAutoReply(data: ContactFormData) {
               <p style="color: #666; font-size: 14px; margin: 0;">
                 Best regards,<br>
                 <strong>The MyAuthGrp Team</strong><br>
-                <a href="mailto:hello@myauthgrp.com" style="color: #8b5cf6;">hello@myauthgrp.com</a> | 
+                <a href="mailto:myauthgrp@gmail.com" style="color: #8b5cf6;">myauthgrp@gmail.com</a> | 
                 <a href="https://myauthgrp.com" style="color: #06b6d4;">myauthgrp.com</a>
               </p>
             </div>
@@ -169,7 +169,7 @@ What happens next?
 
 Best regards,
 The MyAuthGrp Team
-hello@myauthgrp.com | myauthgrp.com
+myauthgrp@gmail.com | myauthgrp.com
       `,
     })
     return { success: true }

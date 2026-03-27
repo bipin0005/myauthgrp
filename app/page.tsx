@@ -948,7 +948,7 @@ export default function HomePage() {
                     </div>
                     <div>
                       <p className="text-gray-400 text-sm">Email</p>
-                      <p className="text-white">hello@myauthgrp.com</p>
+                      <p className="text-white">myauthgrp@gmail.com</p>
                     </div>
                   </div>
 
