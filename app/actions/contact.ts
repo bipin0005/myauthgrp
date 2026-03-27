@@ -35,7 +35,7 @@ export async function submitContactForm(formData: FormData) {
     if (!emailResult.success) {
       return {
         success: false,
-        error: emailResult.error || "Failed to send message",
+        error: emailResult.error || "Failed to send message. Please try again.",
       }
     }
 
